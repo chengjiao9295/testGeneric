@@ -19,6 +19,7 @@ public class GenericTest implements ApplicationContextAware {
 
     public <T> T getBean(Class<T> clazz){
         logger.info("getbean");
+       // context.getBeansOfType(clazz,false,true);
         return context.getBean(clazz);
     }
 
