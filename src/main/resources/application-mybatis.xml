@@ -9,7 +9,8 @@
         http://www.springframework.org/schema/context/spring-context-4.3.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-    <context:property-placeholder location="classpath:config.properties"/><!-- 用来读取config.properties文件中的数据-->
+    <context:property-placeholder location="classpath:config.properties"/>
+    <!-- 用来读取config.properties文件中的数据-->
 
     <!--配置1个连接池对象,用来配置一个数据源，这里数据实现类来自dbcp中的一个属性类。其中属性的值就是来自于config.properties-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
