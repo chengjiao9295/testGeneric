@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../CrunchifySpringMVCTutorial/CrunchifySpringMVCTutorial.iml" filepath="$PROJECT_DIR$/../CrunchifySpringMVCTutorial/CrunchifySpringMVCTutorial.iml" />
       <module fileurl="file://$PROJECT_DIR$/testGeneric.iml" filepath="$PROJECT_DIR$/testGeneric.iml" />
     </modules>
   </component>

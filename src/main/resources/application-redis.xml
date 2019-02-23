@@ -8,36 +8,36 @@
         http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache.xsd">
     <!--//redis主配置信息-->
-    <cache:annotation-driven cache-manager="cacheManager"/>
-    <context:property-placeholder location="classpath:config.properties"/>
-    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxIdle" value="${redis.maxIdle}" />
-        <property name="maxTotal" value="${redis.maxActive}" />
-        <property name="maxWaitMillis" value="${redis.maxWait}" />
-        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
-    </bean>
-    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >
-        <property name="usePool" value="true"></property>
-        <property name="hostName" value="${redis.host}" />
-        <property name="port" value="${redis.port}" />
-        <property name="password" value="${redis.pass}" />
-        <property name="timeout" value="${redis.timeout}" />
-        <property name="database" value="${redis.dbIndex}"></property>
-        <constructor-arg index="0" ref="poolConfig" />
-    </bean>
-    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-        <property name="connectionFactory"   ref="connectionFactory" />
-    </bean>
-    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
-        <property name="caches">
-            <set>
-                <bean class="RedisCache">
-                    <!--//注入RedisCache    bean可以配置多个。指定不同的value-->
-                    <property name="redisTemplate" ref="redisTemplate" />
-                    <property name="name" value="common"/>
-                    <!--//此处定义的common。必须和注解中的value对应-->
-                </bean>
-            </set>
-        </property>
-    </bean>
+    <!--<cache:annotation-driven cache-manager="cacheManager"/>-->
+    <!--<context:property-placeholder location="classpath:config.properties"/>-->
+    <!--<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+        <!--<property name="maxIdle" value="${redis.maxIdle}" />-->
+        <!--<property name="maxTotal" value="${redis.maxActive}" />-->
+        <!--<property name="maxWaitMillis" value="${redis.maxWait}" />-->
+        <!--<property name="testOnBorrow" value="${redis.testOnBorrow}" />-->
+    <!--</bean>-->
+    <!--<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" >-->
+        <!--<property name="usePool" value="true"></property>-->
+        <!--<property name="hostName" value="${redis.host}" />-->
+        <!--<property name="port" value="${redis.port}" />-->
+        <!--<property name="password" value="${redis.pass}" />-->
+        <!--<property name="timeout" value="${redis.timeout}" />-->
+        <!--<property name="database" value="${redis.dbIndex}"></property>-->
+        <!--<constructor-arg index="0" ref="poolConfig" />-->
+    <!--</bean>-->
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
+        <!--<property name="connectionFactory"   ref="connectionFactory" />-->
+    <!--</bean>-->
+    <!--<bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">-->
+        <!--<property name="caches">-->
+            <!--<set>-->
+                <!--<bean class="RedisCache">-->
+                    <!--&lt;!&ndash;//注入RedisCache    bean可以配置多个。指定不同的value&ndash;&gt;-->
+                    <!--<property name="redisTemplate" ref="redisTemplate" />-->
+                    <!--<property name="name" value="common"/>-->
+                    <!--&lt;!&ndash;//此处定义的common。必须和注解中的value对应&ndash;&gt;-->
+                <!--</bean>-->
+            <!--</set>-->
+        <!--</property>-->
+    <!--</bean>-->
 </beans>

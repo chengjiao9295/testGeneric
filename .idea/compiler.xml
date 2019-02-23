@@ -6,10 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="CrunchifySpringMVCTutorial" />
         <module name="testGeneric" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="CrunchifySpringMVCTutorial" target="1.8" />
+      <module name="oribizMgmt" target="1.8" />
+      <module name="OribizMgmtCommon" target="1.8" />
+      <module name="OribizMgmtController" target="1.8" />
+      <module name="OribizMgmtDataAccess" target="1.8" />
+      <module name="OribizMgmtFront" target="1.8" />
+      <module name="OribizMgmtFrontDev" target="1.8" />
+      <module name="OribizMgmtService" target="1.8" />
       <module name="testGeneric" target="1.8" />
     </bytecodeTargetLevel>
   </component>

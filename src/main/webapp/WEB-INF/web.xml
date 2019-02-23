@@ -2,10 +2,17 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1" metadata-complete="true">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
   <listener>
     <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
   </listener>
-  <!--&lt;!&ndash;配置一个用于处理中文编码的过滤器&ndash;&gt;-->
+  <!--&lt;!&ndash;&lt;!&ndash;配置一个用于处理中文编码的过滤器&ndash;&gt;&ndash;&gt;-->
   <filter>
     <filter-name>CharacterEncodingFilter</filter-name>
     <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -18,7 +25,7 @@
     <filter-name>CharacterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
-  <!-- log4j2-begin -->
+  <!--&lt;!&ndash; log4j2-begin &ndash;&gt;-->
   <filter>
     <filter-name>log4jServletFilter</filter-name>
     <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
@@ -32,13 +39,24 @@
     <dispatcher>ERROR</dispatcher>
   </filter-mapping>
   <!-- log4j2-end -->
+  <!-- log4j2 -->
+  <context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>classpath*:log4j2.xml</param-value><!-- 我把配置文件放在src里面了 -->
+  </context-param>
+  <!-- log4j2 -->
+
   <!--要注意，Maven的classpath的路径是resources-->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath*:application-*.xml</param-value>
+  </context-param>
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:application-*.xml</param-value>
+      <param-value>/WEB-INF/context.xml</param-value>
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>

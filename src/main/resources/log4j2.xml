@@ -1,6 +1,6 @@
 <configuration status="OFF">
     <properties>
-        <property name="LOG_HOME">F:/logs</property>
+        <property name="LOG_HOME">/logs</property>
         <property name="FILE_NAME">mylog</property>
     </properties>
     <appenders>
@@ -26,7 +26,7 @@
         <root level="info">
             <appender-ref ref="RollingFile"/>
             <appender-ref ref="Console"/>
-            <appender-ref ref="Error" />
+            <!--<appender-ref ref="Error" />-->
         </root>
         <Logger name="genericTest" additivity="false">
             <appender-ref ref="RollingFile"/>
