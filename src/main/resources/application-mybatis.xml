@@ -36,6 +36,7 @@
         </property>
     </bean>
 
+    <!-- 异常-->
     <bean id="myBatisExceptionTranslator" class="org.mybatis.spring.MyBatisExceptionTranslator">
         <constructor-arg index="0" ref="dataSource"/>
         <constructor-arg index="1" value="true"/>

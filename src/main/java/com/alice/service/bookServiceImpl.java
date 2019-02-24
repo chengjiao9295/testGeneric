@@ -19,7 +19,7 @@ public class bookServiceImpl implements bookService {
    public SqlSessionTemplate sqlSession;
 
    public Integer getBookInformation(){
-       logger.info(getBookInformation());
+      logger.info(getBookInformation());
       bookMapper mapper = sqlSession.getMapper(bookMapper.class);
       List<book> bookList=mapper.queryBookInfo();
        for (int i = 0; i <bookList.size() ; i++) {
