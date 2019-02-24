@@ -1,4 +1,4 @@
-package genericTest;
+package com.alice.genericTest;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

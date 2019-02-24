@@ -13,16 +13,15 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!--控制器的扫描-->
-    <context:component-scan base-package="genericTest"/>
+    <context:component-scan base-package="com.alice"/>
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven />
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <!-- 注入数据库连接池 -->
         <property name="dataSource" ref="dataSource" />
     </bean>
-
-    <!-- 配置基于注解的声明式事务 -->
-    <tx:annotation-driven />
     <!-- 配置SpringMVC -->
     <!-- 1.开启SpringMVC注解模式 -->
     <!-- 简化配置：
@@ -30,7 +29,6 @@
         (2)提供一些列：数据绑定，数字和日期的format @NumberFormat, @DateTimeFormat, xml,json默认读写支持
     -->
     <mvc:annotation-driven/>
-
     <!-- 2.静态资源默认servlet配置
         (1)加入对静态资源的处理：js,gif,png
         (2)允许使用"/"做整体映射
@@ -45,5 +43,14 @@
         <property name="prefix" value="/WEB-INF/jsp/" />
         <property name="suffix" value=".jsp" />
     </bean>
-
+    <!-- 文件上传配置 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 设置上传文件的最大尺寸为1MB -->
+        <property name="maxUploadSize">
+            <value>1048576</value>
+        </property>
+        <property name="defaultEncoding">
+            <value>UTF-8</value>
+        </property>
+    </bean>
 </beans>

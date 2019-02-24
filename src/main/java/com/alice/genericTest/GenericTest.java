@@ -1,9 +1,9 @@
-package genericTest;
+package com.alice.genericTest;
 
+import com.alice.service.bookService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ApplicationContext;
 
@@ -18,8 +18,8 @@ public class GenericTest implements ApplicationContextAware {
     }
 
     public <T> T getBean(Class<T> clazz){
-       // logger.info("getbean");
-       // context.getBeansOfType(clazz,false,true);
+       logger.info("getbean");
+       context.getBeansOfType(clazz,false,true);
         return context.getBean(clazz);
     }
 
@@ -35,7 +35,8 @@ public class GenericTest implements ApplicationContextAware {
     public static void main(String[] args){
 
         GenericTest genericTest = new GenericTest();
-       // GenericTest className= genericTest.getBean(GenericTest.class);
+
+        //bookService className= genericTest.getBean(bookService.class);
         genericTest.test();
         //System.out.println(className);
 
