@@ -22,7 +22,7 @@ public class bookServiceImpl implements bookService {
       logger.info(getBookInformation());
       bookMapper mapper = sqlSession.getMapper(bookMapper.class);
       List<book> bookList=mapper.queryBookInfo();
-       for (int i = 0; i <bookList.size() ; i++) {
+      for (int i = 0; i <bookList.size() ; i++) {
            System.out.println(bookList.get(i).getBook_id());
        }
 

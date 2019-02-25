@@ -1,6 +1,8 @@
 package com.alice.bean;
 
 
+import org.apache.ibatis.annotations.Param;
+
 public class book {
     public int book_id;
     public String name;

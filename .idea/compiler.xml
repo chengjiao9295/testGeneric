@@ -19,6 +19,7 @@
       <module name="OribizMgmtFront" target="1.8" />
       <module name="OribizMgmtFrontDev" target="1.8" />
       <module name="OribizMgmtService" target="1.8" />
+      <module name="ssm" target="1.5" />
       <module name="testGeneric" target="1.8" />
     </bytecodeTargetLevel>
   </component>

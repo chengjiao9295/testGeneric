@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+        http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context-4.3.xsd
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <!-- 用来读取config.properties文件中的数据-->
     <context:property-placeholder location="classpath:config.properties"/>
 
 
     <!--配置1个连接池对象,用来配置一个数据源，这里数据实现类来自dbcp中的一个属性类。其中属性的值就是来自于config.properties-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/><!--加载驱动-->
-        <property name="url" value="jdbc:mysql://localhost:3306/test"/><!--数据库的位置-->
-        <property name="username" value="root"/><!--数据库的用户名-->
-        <property name="password" value="root"/><!--对应的密码-->
+        <property name="driverClassName" value="${jdbc.driverClassName}"/><!--加载驱动-->
+        <property name="url" value="${jdbc.url}"/><!--数据库的位置-->
+        <property name="username" value="${jdbc.username}"/><!--数据库的用户名-->
+        <property name="password" value="${jdbc.password}"/><!--对应的密码-->
         <property name="maxActive" value="50"/><!--连接池的最大活动数-->
         <property name="minIdle" value="5"/><!--最少保持5条空闲连接-->
         <property name="maxWait" value="5000"/><!--等待时间5秒-->
@@ -26,16 +29,22 @@
     <!-- 配置SqlSessionFactoryBean -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:application-mybatis.xml" />
+        <property name="configLocation" value="classpath:mybatis-config.xml" />
         <!-- mapper和resultmap配置路径 -->
         <property name="mapperLocations">
             <list>
                 <!-- 表示在com.alice.mapper包或以下所有目录中，以-resultmap.xml结尾所有文件 -->
-                <value>classpath:com/alice/mapper/*.xml</value>
+                <value>classpath*:com/alice/mapper/*.xml</value>
             </list>
         </property>
+        <property name="failFast" value="true"></property>
     </bean>
-
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+    </bean>
     <!-- 异常-->
     <bean id="myBatisExceptionTranslator" class="org.mybatis.spring.MyBatisExceptionTranslator">
         <constructor-arg index="0" ref="dataSource"/>
@@ -49,9 +58,9 @@
         <constructor-arg name="exceptionTranslator" ref="myBatisExceptionTranslator"></constructor-arg>
     </bean>
 
-    <!-- 5.配置mybatisDao接口扫描MapperScannerConfigurer -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.alice.dao"></property>
-    </bean>
+    <!--&lt;!&ndash; 5.配置mybatisDao接口扫描MapperScannerConfigurer &ndash;&gt;-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com.alice.dao"></property>-->
+    <!--</bean>-->
 
 </beans>
