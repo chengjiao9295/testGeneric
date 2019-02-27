@@ -17,15 +17,11 @@ public class bookServiceImpl implements bookService {
     @Autowired
    public SqlSessionTemplate sqlSession;
 
-   public Integer getBookInformation(){
-      logger.info("getBookInformation()");
+   public List<book> getBookInformation(book param){
+      logger.info("getBookInformation()"+param.toString());
       bookMapper mapper = sqlSession.getMapper(bookMapper.class);
-      List<book> bookList=mapper.queryBookInfo();
-      for (int i = 0; i <bookList.size() ; i++) {
-           System.out.println(bookList.get(i).getBook_id());
-       }
-
-     return null;
+      List<book> bookList=mapper.queryBookInfo(param);
+     return bookList;
    }
 
 

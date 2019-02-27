@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.alice.dao.bookMapper">
     <!-- 这里namespace必须是bookMapper接口的路径，不然要运行的时候要报错 “is not known to the MapperRegistry”-->
-    <select id="queryBookInfo" resultType="com.alice.bean.book">
-        select * from book;
+    <select id="queryBookInfo" resultType="com.alice.bean.book" parameterType="com.alice.bean.book">
+        select * from book
+        <trim prefix="WHERE" prefixOverrides="AND">
+            <if test="book_id != null">
+                book_id = #{book_id, jdbcType=INTEGER}
+            </if>
+        </trim>
     </select>
 </mapper>

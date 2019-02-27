@@ -1,5 +1,9 @@
 package com.alice.service;
 
+import com.alice.bean.book;
+
+import java.util.List;
+
 public interface bookService {
-    Integer getBookInformation();
+    List<book> getBookInformation(book book);
 }

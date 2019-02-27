@@ -1,6 +1,7 @@
 package com.alice.genericTest;
 
 import com.alice.service.bookService;
+import com.alice.service.bookServiceImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.BeansException;
@@ -36,7 +37,7 @@ public class GenericTest implements ApplicationContextAware {
 
         GenericTest genericTest = new GenericTest();
 
-        //bookService className= genericTest.getBean(bookService.class);
+        GenericTest className= genericTest.getBean(GenericTest.class);
         genericTest.test();
         //System.out.println(className);
 
