@@ -47,17 +47,24 @@
   <!-- log4j2 -->
 
   <!--要注意，Maven的classpath的路径是resources-->
+  <!--Spring官方文档中规定，如果在上下文中没有指定contextConfigLoction配置文件的位置，则会默认去WEB-INF中去寻找对应的配置文件。
+理论上classpath的默认路径是WEB-INF/classes
+所以解决办法就是在context-param中重新定义一遍。
+-->
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath*:application-*.xml</param-value>
+    <param-value>classpath:application-*.xml</param-value>
+    <!--classpath*:application-*.xml-->
   </context-param>
   <servlet>
     <servlet-name>mvc-dispatcher</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>/WEB-INF/context.xml</param-value>
+      <param-value>classpath:application-*.xml</param-value>
+      <!--/WEB-INF/context.xml-->
     </init-param>
+    <!--设置执行的优先级-->
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

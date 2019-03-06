@@ -1,6 +1,8 @@
 package com.alice.controller;
 
 import com.alice.bean.book;
+import com.alice.response.Response;
+import com.alice.response.ResponseUtil;
 import com.alice.service.bookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +19,10 @@ public class bookController {
     @Autowired
     public bookService bookService;
 
+
     @RequestMapping(value = "getBookInfo")
     public List<book> getBookInfo(@ModelAttribute book param){
         List<book> bookList = bookService.getBookInformation(param);
         return bookList;
     }
-
 }
